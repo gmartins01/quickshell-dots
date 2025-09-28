@@ -117,9 +117,10 @@ Item {
             invertSide: Settings?.options.bar.position === "bottom"
         }
 
-        DistroIcon {
+        ClockWidget {
+             showDate: false
             Layout.alignment: Qt.AlignVCenter
-            Layout.leftMargin: Appearance.rounding.screenRounding
+            Layout.fillWidth: true
         }
     }
 }

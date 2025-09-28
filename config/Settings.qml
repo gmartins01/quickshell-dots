@@ -100,6 +100,12 @@ Singleton {
                     property bool useNerdFont: false
                 }
             }
+
+            property JsonObject time: JsonObject {
+                property string format: "hh:mm"
+                property string dateFormat: "dddd, dd/MM"
+                property string shortDateFormat: "dd/MM"
+            }
         }
     }
 }
