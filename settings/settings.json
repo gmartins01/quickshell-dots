@@ -1,0 +1,57 @@
+{
+    "bar": {
+        "borderless": false,
+        "bottom": false,
+        "cornerStyle": 0,
+        "position": "top",
+        "screenList": [
+        ],
+        "showBackground": true,
+        "topLeftIcon": "spark",
+        "tray": {
+            "invertPinnedItems": false,
+            "monochromeIcons": true,
+            "pinnedItems": [
+                "Fcitx"
+            ]
+        },
+        "vertical": false,
+        "workspaces": {
+            "alwaysShowNumbers": false,
+            "monochromeIcons": true,
+            "numberMap": [
+                "1",
+                "2"
+            ],
+            "showAppIcons": true,
+            "showNumberDelay": 300,
+            "shown": 10,
+            "useNerdFont": false
+        }
+    },
+    "wallpaper": {
+        "directory": "/home/gmartins/Pictures/",
+        "enableMultiMonitorDirectories": false,
+        "enabled": true,
+        "fillColor": "#000000",
+        "fillMode": "crop",
+        "monitors": [
+            {
+                "directory": "/home/gmartins/Pictures/Wallpapers",
+                "name": "DP-3",
+                "wallpaper": "/home/gmartins/Pictures/Wallpapers/qk81y2vbscz71.jpg"
+            },
+            {
+                "directory": "/home/gmartins/Pictures/",
+                "name": "DP-1",
+                "wallpaper": "/home/gmartins/Pictures/Wallpapers/qk81y2vbscz71.jpg"
+            }
+        ],
+        "randomEnabled": false,
+        "randomIntervalSec": 300,
+        "setWallpaperOnAllMonitors": true,
+        "transitionDuration": 1500,
+        "transitionEdgeSmoothness": 0.05,
+        "transitionType": "disc"
+    }
+}
