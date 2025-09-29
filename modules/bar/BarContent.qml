@@ -1,11 +1,12 @@
-import QtQuick
-import QtQuick.Layouts
-import Quickshell
 import qs
 import qs.utils
 import qs.services
 import qs.config
 import qs.modules.widgets
+
+import QtQuick
+import QtQuick.Layouts
+import Quickshell
 
 Item {
     id: root
@@ -117,8 +118,12 @@ Item {
             invertSide: Settings?.options.bar.position === "bottom"
         }
 
+        StyledText {
+            text: `${Math.round(AudioService.volume * 100)}%`
+        }
+
         ClockWidget {
-             showDate: false
+            showDate: false
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
         }
