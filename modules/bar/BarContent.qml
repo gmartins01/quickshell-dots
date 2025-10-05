@@ -54,12 +54,11 @@ Item {
             monitorName: root.screen.name
         }
 
-        // ActiveWindow {
-        //     visible: true
-        //     Layout.fillWidth: false
-        //     Layout.fillHeight: true
-        //     bar: root
-        // }
+        ActiveWindow {
+            Layout.fillWidth: false
+            Layout.fillHeight: true
+            parentScreen: root.screen
+        }
 
         // MouseArea {
         //     Layout.alignment: Qt.AlignVCenter
