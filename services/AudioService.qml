@@ -1,4 +1,5 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick
@@ -38,8 +39,8 @@ Singleton {
     Connections {
         target: sink?.audio ?? null
 
-        function onVolumeChanged() {
-            console.log("Volume changed to: ", volume);
-        }
+        // function onVolumeChanged() {
+        //     console.log("Volume changed to: ", volume);
+        // }
     }
 }

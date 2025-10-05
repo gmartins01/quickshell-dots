@@ -1,7 +1,6 @@
 pragma Singleton
 
 import Quickshell
-import qs.services
 
 Singleton {
     id: root
@@ -16,5 +15,15 @@ Singleton {
         if (strength >= 20)
             return "network_wifi_1_bar";
         return "signal_wifi_0_bar";
+    }
+
+    function getVolumeIcon(volume: real, isMuted: bool): string {
+        if (isMuted)
+            return "volume_off";
+        if (volume >= 0.3)
+            return "volume_up";
+        if (volume > 0)
+            return "volume_down";
+        return "volume_mute";
     }
 }

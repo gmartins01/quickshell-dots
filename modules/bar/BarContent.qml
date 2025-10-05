@@ -12,6 +12,7 @@ Item {
     id: root
 
     required property ShellScreen screen
+    property var brightnessMonitor: BrightnessService.getMonitorForScreen(screen)
 
     // Background shadow
     // Loader {
@@ -22,10 +23,6 @@ Item {
     //         target: barBackground
     //     }
     // }
-
-    Component.onCompleted: {
-        console.log("TESTE", screen);
-    }
 
     // Background
     Rectangle {
@@ -56,6 +53,36 @@ Item {
         HyprlandWorkspaces {
             monitorName: root.screen.name
         }
+
+        // ActiveWindow {
+        //     visible: true
+        //     Layout.fillWidth: false
+        //     Layout.fillHeight: true
+        //     bar: root
+        // }
+
+        // MouseArea {
+        //     Layout.alignment: Qt.AlignVCenter
+        //
+        //     Layout.fillHeight: true
+        //
+        //     implicitHeight: parent.height
+        //     height: parent.height
+        //
+        //     StyledText {
+        //         text: root.brightnessMonitor.brightness * 100
+        //
+        //         WheelHandler {
+        //             onWheel: event => {
+        //                 if (event.angleDelta.y < 0)
+        //                     root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness - 0.05);
+        //                 else if (event.angleDelta.y > 0)
+        //                     root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness + 0.05);
+        //             }
+        //             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        //         }
+        //     }
+        // }
 
         // Rectangle {
         //     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
@@ -116,6 +143,27 @@ Item {
             Layout.fillWidth: false
             Layout.fillHeight: true
             invertSide: Settings?.options.bar.position === "bottom"
+        }
+
+        MaterialIcon {
+            id: volumeIcon
+
+            text: Icons.getVolumeIcon(AudioService.volume, AudioService.muted)
+            iconSize: Appearance.font.pixelSize.larger
+            color: Colors.colors.colOnLayer0
+
+            WheelHandler {
+                target: volumeIcon
+                onWheel: event => {
+                    const current = AudioService.sink.audio.volume;
+                    const step = current < 0.1 ? 0.01 : 0.02;
+                    if (event.angleDelta.y < 0)
+                        AudioService.sink.audio.volume = Math.max(0, current - step);
+                    else if (event.angleDelta.y > 0)
+                        AudioService.sink.audio.volume = Math.min(1, current + step);
+                }
+                acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+            }
         }
 
         StyledText {
