@@ -50,66 +50,11 @@ Item {
             // Layout.leftMargin: Appearance.rounding.screenRounding
         }
 
-        HyprlandWorkspaces {
-            monitorName: root.screen.name
-        }
-
         ActiveWindow {
             Layout.fillWidth: false
             Layout.fillHeight: true
             parentScreen: root.screen
         }
-
-        // MouseArea {
-        //     Layout.alignment: Qt.AlignVCenter
-        //
-        //     Layout.fillHeight: true
-        //
-        //     implicitHeight: parent.height
-        //     height: parent.height
-        //
-        //     StyledText {
-        //         text: root.brightnessMonitor.brightness * 100
-        //
-        //         WheelHandler {
-        //             onWheel: event => {
-        //                 if (event.angleDelta.y < 0)
-        //                     root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness - 0.05);
-        //                 else if (event.angleDelta.y > 0)
-        //                     root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness + 0.05);
-        //             }
-        //             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-        //         }
-        //     }
-        // }
-
-        // Rectangle {
-        //     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-        //     Layout.preferredWidth: 35
-        //     Layout.preferredHeight: 35
-        //
-        //     radius: 5
-        //     color: Colors.m3colors.m3primary
-        //     Text {
-        //         anchors.centerIn: parent
-        //         text: ""
-        //         font.family: "Jetbrains Mono NF"
-        //
-        //         color: "#181926"
-        //         font.pixelSize: 20
-        //         font.weight: 300
-        //     }
-        //
-        //     MouseArea {
-        //         anchors.fill: parent
-        //         hoverEnabled: true
-        //         cursorShape: Qt.PointingHandCursor
-        //
-        //         //onEntered: parent.color = "#B7BCF8"
-        //         //onExited: parent.color = "#B7BCF8"
-        //         //onClicked: banging
-        //     }
-        // }
     }
 
     RowLayout {
@@ -118,13 +63,11 @@ Item {
         height: parent.height
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        // spacing: 4
+        spacing: 4
 
-        MaterialIcon {
-            //Layout.rightMargin: indicatorsRowLayout.realSpacing
-            text: NetworkService.active ? Icons.getNetworkIcon(NetworkService.active.strength ?? 0) : "signal_wifi_off"
-            iconSize: Appearance.font.pixelSize.larger
-            color: Colors.colors.colOnLayer0 // toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
+        Workspaces {
+            screenName: root.screen.name
+            widgetHeight: 40//barWindow.widgetThickness
         }
     }
 
@@ -135,7 +78,7 @@ Item {
         anchors.right: parent.right//barBackground.right
         anchors.rightMargin: Appearance.margins.small
         anchors.verticalCenter: barBackground.verticalCenter
-        spacing: 4
+        spacing: 10
 
         SysTray {
             visible: true//root.useShortenedForm === 0
@@ -167,6 +110,13 @@ Item {
 
         StyledText {
             text: `${Math.round(AudioService.volume * 100)}%`
+        }
+
+        MaterialIcon {
+            //Layout.rightMargin: indicatorsRowLayout.realSpacing
+            text: NetworkService.active ? Icons.getNetworkIcon(NetworkService.active.strength ?? 0) : "signal_wifi_off"
+            iconSize: Appearance.font.pixelSize.larger
+            color: Colors.colors.colOnLayer0 // toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
         }
 
         ClockWidget {
