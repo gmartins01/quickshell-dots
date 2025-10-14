@@ -87,6 +87,10 @@ Item {
             invertSide: Settings?.options.bar.position === "bottom"
         }
 
+        NotificationsIcon {
+            parentScreen: screen
+        }
+
         MaterialIcon {
             id: volumeIcon
 

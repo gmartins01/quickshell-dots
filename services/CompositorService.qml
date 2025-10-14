@@ -193,7 +193,7 @@ Singleton {
                 root.isHyprland = false;
                 root.compositor = "niri";
                 console.log("CompositorService: Detected Niri with socket:", root.niriSocket);
-                NiriService.generateNiriBinds();
+                // NiriService.generateNiriBinds();
             } else {
                 root.isHyprland = false;
                 root.isNiri = true;

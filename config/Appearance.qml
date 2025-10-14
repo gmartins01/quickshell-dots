@@ -16,6 +16,32 @@ Singleton {
 
     property real backgroundTransparency: 0//Config?.options.appearance.transparency.enable ? Config?.options.appearance.transparency.automatic ? autoBackgroundTransparency : Config?.options.appearance.transparency.backgroundTransparency : 0
 
+    readonly property real popupDistance: 2
+
+    function snap(value, dpr) {
+        return Math.round(value * dpr) / dpr;
+    }
+
+    function getPopupTriggerPosition(globalPos, screen, widgetWidth) {
+        const screenX = screen ? screen.x : 0;
+        const screenY = screen ? screen.y : 0;
+        const relativeX = globalPos.x - screenX;
+        const relativeY = globalPos.y - screenY;
+
+        // if (dankBarPosition === SettingsData.Position.Left || dankBarPosition === SettingsData.Position.Right) {
+        //     return {
+        //         x: relativeY,
+        //         y: barThickness + dankBarSpacing + Theme.popupDistance,
+        //         width: widgetWidth
+        //     };
+        // }
+        return {
+            x: relativeX,
+            y: sizes.baseBarHeight + popupDistance,
+            width: widgetWidth
+        };
+    }
+
     rounding: QtObject {
         property int unsharpen: 2
         property int unsharpenmore: 6

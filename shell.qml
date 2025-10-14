@@ -34,6 +34,11 @@ ShellRoot {
         id: notificationPopup
     }
 
+    NotificationCenter {
+        id: notificationHistoryPanel
+        objectName: "notificationHistoryPanel"
+    }
+
     LazyLoader {
         active: enableReloadPopup
         component: ReloadPopup {}

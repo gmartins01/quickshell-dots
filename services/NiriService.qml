@@ -183,9 +183,9 @@ Singleton {
             case 'OverviewOpenedOrClosed':
                 handleOverviewChanged(event.OverviewOpenedOrClosed);
                 break;
-            case 'ConfigLoaded':
-                handleConfigLoaded(event.ConfigLoaded);
-                break;
+            // case 'ConfigLoaded':
+            //     handleConfigLoaded(event.ConfigLoaded);
+            //     break;
             case 'KeyboardLayoutsChanged':
                 handleKeyboardLayoutsChanged(event.KeyboardLayoutsChanged);
                 break;
@@ -707,7 +707,7 @@ Singleton {
         }
 
         configGenerationPending = true
-        configGenerationDebounce.restart()
+        // configGenerationDebounce.restart()
     }
 
     function doGenerateNiriLayoutConfig() {

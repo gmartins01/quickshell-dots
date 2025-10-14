@@ -36,14 +36,11 @@ Rectangle {
         return 1;
     }
     property var workspaceList: {
-        console.log("workspaceList");
         if (CompositorService.isNiri) {
-            console.log("aqui niri");
             const baseList = getNiriWorkspaces();
-            return SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList;
+            return baseList;//SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList;
         }
         if (CompositorService.isHyprland) {
-            console.log("aqui hyorland");
             const baseList = getHyprlandWorkspaces();
             return baseList;//SettingsData.showWorkspacePadding ? padWorkspaces(baseList) : baseList;
         }
@@ -140,7 +137,8 @@ Rectangle {
             return [1, 2];
         }
 
-        if (!root.screenName || !SettingsData.workspacesPerMonitor) {
+        if (!root.screenName) {
+            //|| !SettingsData.workspacesPerMonitor) {
             return NiriService.getCurrentOutputWorkspaceNumbers();
         }
 
@@ -153,7 +151,8 @@ Rectangle {
             return 1;
         }
 
-        if (!root.screenName || !SettingsData.workspacesPerMonitor) {
+        if (!root.screenName) {
+            //|| !SettingsData.workspacesPerMonitor) {
             return NiriService.getCurrentWorkspaceNumber();
         }
 
