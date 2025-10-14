@@ -6,159 +6,6 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 
-// PanelWindow {
-//     id: root
-//
-//     WlrLayershell.namespace: "quickshell:popout"
-//
-//     property alias content: contentLoader.sourceComponent
-//     property alias contentLoader: contentLoader
-//     property real popupWidth: 400
-//     property real popupHeight: 300
-//     property real triggerX: 0
-//     property real triggerY: 0
-//     property real triggerWidth: 40
-//     property string triggerSection: ""
-//     property string positioning: "center"
-//     property int animationDuration: 300//Theme.shortDuration
-//     property var animationEasing: Easing.OutQuart
-//     property bool shouldBeVisible: false
-//
-//     signal opened
-//     signal popoutClosed
-//     signal backgroundClicked
-//
-//     function open() {
-//         closeTimer.stop();
-//         shouldBeVisible = true;
-//         visible = true;
-//         opened();
-//     }
-//
-//     function close() {
-//         shouldBeVisible = false;
-//         closeTimer.restart();
-//     }
-//
-//     function toggle() {
-//         if (shouldBeVisible)
-//             close();
-//         else
-//             open();
-//     }
-//
-//     Timer {
-//         id: closeTimer
-//         interval: animationDuration + 50
-//         onTriggered: {
-//             if (!shouldBeVisible) {
-//                 visible = false;
-//                 popoutClosed();
-//             }
-//         }
-//     }
-//
-//     color: "transparent"
-//     WlrLayershell.layer: WlrLayershell.Top
-//     WlrLayershell.exclusiveZone: -1
-//     WlrLayershell.keyboardFocus: shouldBeVisible ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
-//
-//     anchors {
-//         top: true
-//         left: true
-//         right: true
-//         bottom: true
-//     }
-//
-//     readonly property real screenWidth: root.screen.width
-//     readonly property real screenHeight: root.screen.height
-//     readonly property real dpr: root.screen.devicePixelRatio
-//
-//     readonly property real calculatedX: {
-//         // if (SettingsData.dankBarPosition === SettingsData.Position.Left) {
-//         // return triggerY;
-//         // } else if (SettingsData.dankBarPosition === SettingsData.Position.Right) {
-//         // return screenWidth - triggerY - popupWidth;
-//         // } else {
-//         const centerX = triggerX + (triggerWidth / 2) - (popupWidth / 2);
-//         return Math.max(Appearance.popupDistance, Math.min(screenWidth - popupWidth - Appearance.popupDistance, centerX));
-//         // }
-//     }
-//     readonly property real calculatedY: {
-//         // if (SettingsData.dankBarPosition === SettingsData.Position.Left || SettingsData.dankBarPosition === SettingsData.Position.Right) {
-//         // const centerY = triggerX + (triggerWidth / 2) - (popupHeight / 2);
-//         // return Math.max(Appearance.popupDistance, Math.min(screenHeight - popupHeight - Appearance.popupDistance, centerY));
-//         // } else if (SettingsData.dankBarPosition === SettingsData.Position.Bottom) {
-//         // return Math.max(Appearance.popupDistance, Math.min(screenHeight - popupHeight - Appearance.popupDistance, screenHeight - triggerY - popupHeight + Appearance.popupDistance));
-//         // } else {
-//         return Math.max(Appearance.popupDistance, Math.min(screenHeight - popupHeight - Appearance.popupDistance, triggerY + Appearance.popupDistance));
-//         // }
-//     }
-//
-//     readonly property real alignedWidth: Appearance.snap(popupWidth, dpr)
-//     readonly property real alignedHeight: Appearance.snap(popupHeight, dpr)
-//     readonly property real alignedX: Appearance.snap(calculatedX, dpr)
-//     readonly property real alignedY: Appearance.snap(calculatedY, dpr)
-//
-//     MouseArea {
-//         anchors.fill: parent
-//         enabled: shouldBeVisible
-//         onClicked: mouse => {
-//             if (mouse.x < alignedX || mouse.x > alignedX + alignedWidth || mouse.y < alignedY || mouse.y > alignedY + alignedHeight) {
-//                 backgroundClicked();
-//                 close();
-//             }
-//         }
-//     }
-//
-//     Loader {
-//         id: contentLoader
-//         x: alignedX
-//         y: alignedY
-//         width: alignedWidth
-//         height: alignedHeight
-//         active: root.visible
-//         asynchronous: false
-//         opacity: Quickshell.env("DMS_DISABLE_LAYER") === "true" ? (shouldBeVisible ? 1 : 0) : 1
-//         layer.enabled: Quickshell.env("DMS_DISABLE_LAYER") !== "true"
-//         layer.effect: MultiEffect {
-//             source: contentLoader
-//             opacity: shouldBeVisible ? 1 : 0
-//
-//             Behavior on opacity {
-//                 NumberAnimation {
-//                     duration: animationDuration
-//                     easing.type: animationEasing
-//                 }
-//             }
-//         }
-//
-//         Behavior on opacity {
-//             NumberAnimation {
-//                 duration: animationDuration
-//                 easing.type: animationEasing
-//             }
-//         }
-//     }
-//
-//     Item {
-//         x: alignedX
-//         y: alignedY
-//         width: alignedWidth
-//         height: alignedHeight
-//         focus: true
-//         Keys.onPressed: event => {
-//             if (event.key === Qt.Key_Escape) {
-//                 close();
-//                 event.accepted = true;
-//             }
-//         }
-//         Component.onCompleted: forceActiveFocus()
-//         onVisibleChanged: if (visible)
-//             forceActiveFocus()
-//     }
-// }
-
 Loader {
     id: root
 
@@ -170,7 +17,7 @@ Loader {
     property real preferredHeight: 900
     property real preferredWidthRatio
     property real preferredHeightRatio
-    property color panelBackgroundColor: Colors.m3colors.m3surface
+    property color panelBackgroundColor: Colors.colLayer0
     property bool draggable: false
     property var buttonItem: null
     property string buttonName: ""
@@ -269,10 +116,8 @@ Loader {
         // IPC calls have no idead on which screen they panel will spawn.
         // Resolve the button name to a proper button item now that we have a screen.
         if (buttonName !== "" && root.screen !== null) {
-            console.log("aqui")
             buttonItem = BarService.lookupWidget(buttonName, root.screen.name);
         }
-        console.log("SETPORIS SS AAS AS S")
 
         // Get the button position if provided
         if (buttonItem !== undefined && buttonItem !== null) {
@@ -294,13 +139,12 @@ Loader {
             // PanelWindow has its own screen property inherited of QsWindow
             property real scaling: 1//ScalingService.getScreenScale(screen)
 
-            readonly property string barPosition: "top"//Settings.data.bar.position
+            readonly property string barPosition: Settings.options.bar.position
             readonly property bool isVertical: false//barPosition === "left" || barPosition === "right"
             readonly property bool barIsVisible: true//(screen !== null) && (Settings.data.bar.monitors.includes(screen.name) || (Settings.data.bar.monitors.length === 0))
             readonly property real verticalBarWidth: Math.round(Appearance.sizes.barHeight * scaling)
 
             Component.onCompleted: {
-                console.log("Panel ", "Opened", root.objectName, "on", screen.name);
                 dimmingOpacity = 0;//Style.opacityHeavy;
                 root.scaling = scaling; //= ScalingService.getScreenScale(screen);
 
@@ -387,9 +231,9 @@ Loader {
             Rectangle {
                 id: panelBackground
                 color: panelBackgroundColor
-                radius: 5//Style.radiusL * scaling
-                border.color: "#FFF"//Color.mOutline TODO:AQUIO
-                border.width: Math.max(1, 2 * scaling)
+                radius: 10//Style.radiusL * scaling
+                border.color: Colors.colLayer0Border
+                border.width: Math.max(1, 1 * scaling)
                 // Dragging support
                 property bool draggable: root.draggable
                 property bool isDragged: false
