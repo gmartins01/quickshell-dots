@@ -10,7 +10,6 @@ import Quickshell.Wayland
 import Quickshell.Services.Notifications
 import Qt5Compat.GraphicalEffects
 
-// Notification History panel
 StyledPanel {
     id: root
 
@@ -24,7 +23,7 @@ StyledPanel {
         ColumnLayout {
             id: notificationsRect
             anchors.fill: parent
-            anchors.margins: 10//Style.marginL
+            anchors.margins: 20//Style.marginL
             // color: "transparent"
 
             // Header
@@ -66,43 +65,47 @@ StyledPanel {
                 }
             }
 
-            NotificationListView { // Scrollable window
-                id: listview
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+            StyledDivider {
                 Layout.topMargin: 10
                 Layout.bottomMargin: 10
-
-                clip: true
-                layer.enabled: true
-                layer.effect: OpacityMask {
-                    maskSource: Rectangle {
-                        width: listview.width
-                        height: listview.height
-                        radius: Appearance.rounding.normal
-                    }
-                }
-
-                popup: false
+                Layout.fillWidth: true
             }
 
-            // Placeholder when list is empty
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                visible: opacity > 0
-                opacity: (NotificationService.list.length === 0) ? 1 : 0
+                // Fundo da lista
+                NotificationListView {
+                    id: listview
+                    anchors.fill: parent
 
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Appearance.animation.menuDecel.duration
-                        easing.type: Appearance.animation.menuDecel.type
+                    clip: true
+                    layer.enabled: true
+                    layer.effect: OpacityMask {
+                        maskSource: Rectangle {
+                            width: listview.width
+                            height: listview.height
+                            radius: Appearance.rounding.normal
+                        }
                     }
+
+                    popup: false
                 }
 
+                // Placeholder quando não há notificações
                 ColumnLayout {
                     anchors.centerIn: parent
+                    visible: opacity > 0
+                    opacity: (NotificationService.list.length === 0) ? 1 : 0
+
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: Appearance.animation.menuDecel.duration
+                            easing.type: Appearance.animation.menuDecel.type
+                        }
+                    }
+
                     spacing: 5
 
                     MaterialIcon {
@@ -111,35 +114,13 @@ StyledPanel {
                         color: Colors.m3colors.m3outline
                         text: "notifications_active"
                     }
+
                     StyledText {
                         Layout.alignment: Qt.AlignHCenter
                         font.pixelSize: Appearance.font.pixelSize.normal
                         color: Colors.m3colors.m3outline
                         horizontalAlignment: Text.AlignHCenter
                         text: "No notifications"
-                    }
-                }
-            }
-
-            Item {
-                id: statusRow
-              
-
-                Layout.fillWidth: true
-                implicitHeight: Math.max(controls.implicitHeight, statusText.implicitHeight)
-
-                StyledText {
-                    id: statusText
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 10
-                    horizontalAlignment: Text.AlignHCenter
-                    text: NotificationService.list.length
-
-                    opacity: NotificationService.list.length > 0 ? 1 : 0
-                    visible: opacity > 0
-                    Behavior on opacity {
-                        animation: Appearance.animation.elementMove.numberAnimation.createObject(this)
                     }
                 }
             }
