@@ -231,7 +231,7 @@ Loader {
             Rectangle {
                 id: panelBackground
                 color: panelBackgroundColor
-                radius: 10//Style.radiusL * scaling
+                radius: Appearance.rounding.normal
                 border.color: Colors.colLayer0Border
                 border.width: Math.max(1, 1 * scaling)
                 // Dragging support

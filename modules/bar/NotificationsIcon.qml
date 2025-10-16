@@ -8,8 +8,6 @@ RippleButton {
     id: root
 
     property bool showPing: false
-    property var popupTarget: null
-    property var parentScreen: null
 
     property real buttonPadding: 5
     implicitWidth: icon.width + buttonPadding * 2
@@ -20,8 +18,6 @@ RippleButton {
     colBackgroundToggled: Colors.colors.colSecondaryContainer
     colBackgroundToggledHover: Colors.colors.colSecondaryContainerHover
     colRippleToggled: Colors.colors.colSecondaryContainerActive
-
-    signal notifIconClicked
 
     onClicked: {
         const panel = PanelService.getPanel("notificationHistoryPanel");

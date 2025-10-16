@@ -4,6 +4,7 @@
 // import qs.modules//"./modules/"
 import "./modules/bar/"
 import "./modules/background/"
+import "./modules/calendar/"
 import "./modules/notifications/"
 import "./modules/common/"
 import "./services/"
@@ -37,6 +38,11 @@ ShellRoot {
     NotificationCenter {
         id: notificationHistoryPanel
         objectName: "notificationHistoryPanel"
+    }
+
+    CalendarWidget {
+        id: calendarPanel
+        objectName: "calendarPanel"
     }
 
     LazyLoader {
