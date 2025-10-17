@@ -1,6 +1,7 @@
 import qs.config
 import qs.services
 import qs.modules.widgets
+import qs.modules.notificationPopup
 
 import QtQuick
 import QtQuick.Layouts

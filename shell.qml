@@ -5,7 +5,8 @@
 import "./modules/bar/"
 import "./modules/background/"
 import "./modules/calendar/"
-import "./modules/notifications/"
+import "./modules/notificationPopup/"
+import "./modules/notificationCenter/"
 import "./modules/common/"
 import "./services/"
 

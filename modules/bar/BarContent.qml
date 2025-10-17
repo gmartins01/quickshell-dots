@@ -87,7 +87,7 @@ Item {
             invertSide: Settings?.options.bar.position === "bottom"
         }
 
-        NotificationsIcon {
+        NotificationIcon {
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
         }

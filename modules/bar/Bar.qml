@@ -1,4 +1,3 @@
-import qs.modules.common
 import qs.config
 
 import QtQuick
