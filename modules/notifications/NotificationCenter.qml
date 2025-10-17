@@ -15,7 +15,7 @@ StyledPanel {
 
     preferredWidth: 460 // TODO: meter na Appearance
     preferredHeight: 580
-   panelBackgroundColor: Colors.colLayer1
+    panelBackgroundColor: Colors.colLayer1
     panelKeyboardFocus: true
 
     panelContent: Item {

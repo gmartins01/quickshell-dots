@@ -70,6 +70,7 @@ Singleton {
     }
 
     property bool silent: false
+    property int unread: 0
     property var filePath: Paths.notificationsPath
     property list<Notif> list: []
     property var popupList: list.filter(notif => notif.popup)
@@ -174,10 +175,16 @@ Singleton {
                 }
             }
 
+            root.unread++;
+
             root.notify(newNotifObject);
             // console.log(notifToString(newNotifObject));
             notifFileView.setText(stringifyList(root.list));
         }
+    }
+
+    function markAllRead() {
+        root.unread = 0;
     }
 
     function discardNotification(id) {

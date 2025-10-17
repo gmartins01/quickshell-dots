@@ -67,7 +67,7 @@ Item {
 
         Workspaces {
             screenName: root.screen.name
-            widgetHeight: 40//barWindow.widgetThickness
+            widgetHeight: 45//barWindow.widgetThickness
         }
     }
 
@@ -87,14 +87,17 @@ Item {
             invertSide: Settings?.options.bar.position === "bottom"
         }
 
-        NotificationsIcon {}
+        NotificationsIcon {
+            Layout.alignment: Qt.AlignVCenter
+            Layout.fillWidth: true
+        }
 
         MaterialIcon {
             id: volumeIcon
 
             text: Icons.getVolumeIcon(AudioService.volume, AudioService.muted)
             iconSize: Appearance.font.pixelSize.larger
-            color: Colors.colors.colOnLayer0
+            color: Colors.colOnLayer0
 
             WheelHandler {
                 target: volumeIcon
@@ -118,7 +121,7 @@ Item {
             //Layout.rightMargin: indicatorsRowLayout.realSpacing
             text: NetworkService.active ? Icons.getNetworkIcon(NetworkService.active.strength ?? 0) : "signal_wifi_off"
             iconSize: Appearance.font.pixelSize.larger
-            color: Colors.colors.colOnLayer0 // toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
+            color: Colors.colOnLayer0 // toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
         }
 
         ClockWidget {

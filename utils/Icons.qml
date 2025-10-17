@@ -26,4 +26,11 @@ Singleton {
             return "volume_down";
         return "volume_mute";
     }
+
+    function getNotificationIcon(isSilent: bool): string {
+        if (isSilent)
+            return "Notifications_Paused";
+
+        return "Notifications";
+    }
 }

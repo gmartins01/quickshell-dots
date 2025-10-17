@@ -53,11 +53,11 @@ RippleButton {
     implicitWidth: rowLayout.width + buttonPadding * 2
     implicitHeight: rowLayout.height + buttonPadding * 2
     buttonRadius: Appearance.rounding.full
-    colBackgroundHover: Colors.colors.colLayer1Hover
-    colRipple: Colors.colors.colLayer1Active
-    colBackgroundToggled: Colors.colors.colSecondaryContainer
-    colBackgroundToggledHover: Colors.colors.colSecondaryContainerHover
-    colRippleToggled: Colors.colors.colSecondaryContainerActive
+    colBackgroundHover: Colors.colLayer1Hover
+    colRipple: Colors.colLayer1Active
+    colBackgroundToggled: Colors.colSecondaryContainer
+    colBackgroundToggledHover: Colors.colSecondaryContainerHover
+    colRippleToggled: Colors.colSecondaryContainerActive
 
     onClicked: {
         const panel = PanelService.getPanel("calendarPanel");
