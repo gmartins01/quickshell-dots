@@ -13,6 +13,9 @@ MouseArea {
     required property SystemTrayItem item
     property bool targetMenuOpen: false
 
+    property int popupX: 0
+    property int popupY: 0
+
     signal menuOpened(qsWindow: var)
     signal menuClosed
 
@@ -51,8 +54,9 @@ MouseArea {
             trayItemMenuHandle: root.item.menu
             anchor {
                 window: root.QsWindow.window
-                rect.x: root.x + (Settings.options.bar.vertical ? 0 : QsWindow.window?.width)
-                rect.y: root.y + (Settings.options.bar.vertical ? QsWindow.window?.height : 0)
+                rect.x: root.popupX + root.x + (root.width/2) - (this.width / 2) 
+                // rect.y: root.y + (Settings.options.bar.vertical ? QsWindow.window?.height : 0)
+                rect.y: root.popupY + root.y - (root.height / 2)
                 rect.height: root.height
                 rect.width: root.width
                 edges: Settings.options.bar.bottom ? (Edges.Top | Edges.Left) : (Edges.Bottom | Edges.Right) //TODO: VER ISTO
@@ -60,7 +64,7 @@ MouseArea {
             }
             onMenuOpened: window => root.menuOpened(window)
             onMenuClosed: {
-                console.log("FECHADO")
+                console.log("FECHADO");
                 root.menuClosed();
                 menu.active = false;
             }

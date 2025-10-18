@@ -20,6 +20,8 @@ Loader {
     // property list<var> pinnedItems: invertPins ? itemsNotInUserList : itemsInUserList
     property list<var> unpinnedItems: itemsNotInUserList//invertPins ? itemsInUserList : itemsNotInUserList
 
+    property var activeMenu: null
+
     property Item hoverTarget
     default property Item contentItem
     property real popupBackgroundMargin: 0
@@ -64,6 +66,10 @@ Loader {
         buttonPosition = Qt.point(itemPos.x, itemPos.y);
         buttonWidth = buttonItem.width;
         buttonHeight = buttonItem.height;
+    }
+
+    function setExtraWindowAndGrabFocus(window) {
+        root.activeMenu = window;
     }
 
     sourceComponent: Component {
@@ -168,8 +174,10 @@ Loader {
                             item: modelData
                             Layout.fillHeight: true//!root.vertical
                             Layout.fillWidth: false//root.vertical
+                            popupX: popupBackground.calculatedX
+                            popupY: popupBackground.calculatedY
                             // onMenuClosed: root.releaseFocus()
-                            // onMenuOpened: qsWindow => root.setExtraWindowAndGrabFocus(qsWindow)
+                            onMenuOpened: qsWindow => root.setExtraWindowAndGrabFocus(qsWindow)
                         }
                     }
                 }

@@ -10,7 +10,7 @@
         "topLeftIcon": "spark",
         "tray": {
             "invertPinnedItems": false,
-            "monochromeIcons": true,
+            "monochromeIcons": false,
             "pinnedItems": [
                 "Fcitx"
             ]

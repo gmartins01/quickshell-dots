@@ -51,7 +51,10 @@ MouseArea {
             trayItemMenuHandle: root.item.menu
             anchor {
                 window: root.QsWindow.window
-                rect.x: root.x + (Settings.options.bar.vertical ? 0 : QsWindow.window?.width)
+                rect.x: {
+                    console.log("root.x ", root.x, " root.popupX  ", root.popupX, " root.width ", root.width, "  QsWindow.window?.width ", QsWindow.window?.width);
+                    return root.x + (Settings.options.bar.vertical ? 0 : QsWindow.window?.width);
+                }
                 rect.y: root.y + (Settings.options.bar.vertical ? QsWindow.window?.height : 0)
                 rect.height: root.height
                 rect.width: root.width
@@ -60,7 +63,7 @@ MouseArea {
             }
             onMenuOpened: window => root.menuOpened(window)
             onMenuClosed: {
-                console.log("FECHADO")
+                console.log("FECHADO");
                 root.menuClosed();
                 menu.active = false;
             }
