@@ -192,7 +192,7 @@ Loader {
             color: "transparent"//Settings.data.general.dimDesktop && !root.isMasked ? Qt.alpha(Color.mShadow, dimmingOpacity) : Color.transparent
 
             WlrLayershell.exclusionMode: ExclusionMode.Ignore
-            WlrLayershell.namespace: "noctalia-panel"
+            WlrLayershell.namespace: "quickshell:panel"
             WlrLayershell.keyboardFocus: root.panelKeyboardFocus ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
             mask: root.isMasked ? maskRegion : null

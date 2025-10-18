@@ -1,8 +1,8 @@
-import qs
 import qs.utils
 import qs.services
 import qs.config
 import qs.modules.widgets
+import "./systray/"
 
 import QtQuick
 import QtQuick.Layouts
@@ -85,6 +85,7 @@ Item {
             Layout.fillWidth: false
             Layout.fillHeight: true
             invertSide: Settings?.options.bar.position === "bottom"
+
         }
 
         NotificationIcon {
@@ -92,36 +93,67 @@ Item {
             Layout.fillWidth: true
         }
 
-        MaterialIcon {
-            id: volumeIcon
-
-            text: Icons.getVolumeIcon(AudioService.volume, AudioService.muted)
-            iconSize: Appearance.font.pixelSize.larger
-            color: Colors.colOnLayer0
-
-            WheelHandler {
-                target: volumeIcon
-                onWheel: event => {
-                    const current = AudioService.sink.audio.volume;
-                    const step = current < 0.1 ? 0.01 : 0.02;
-                    if (event.angleDelta.y < 0)
-                        AudioService.sink.audio.volume = Math.max(0, current - step);
-                    else if (event.angleDelta.y > 0)
-                        AudioService.sink.audio.volume = Math.min(1, current + step);
-                }
-                acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-            }
-        }
-
         StyledText {
             text: `${Math.round(AudioService.volume * 100)}%`
         }
 
-        MaterialIcon {
-            //Layout.rightMargin: indicatorsRowLayout.realSpacing
-            text: NetworkService.active ? Icons.getNetworkIcon(NetworkService.active.strength ?? 0) : "signal_wifi_off"
-            iconSize: Appearance.font.pixelSize.larger
-            color: Colors.colOnLayer0 // toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
+        RippleButton {
+
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.rightMargin: 5//Appearance.rounding.screenRounding
+            Layout.fillWidth: false
+
+            implicitWidth: indicatorsRowLayout.implicitWidth + 10 * 2
+            implicitHeight: indicatorsRowLayout.implicitHeight + 5 * 2
+
+            buttonRadius: Appearance.rounding.full
+            colBackground: ColorUtils.transparentize(Colors.colLayer1Hover, 1) //barRightSideMouseArea.hovered ? Appearance.colors.colLayer1Hover : ColorUtils.transparentize(Appearance.colors.colLayer1Hover, 1)
+            colBackgroundHover: Colors.colLayer1Hover
+            colRipple: Colors.colLayer1Active
+            colBackgroundToggled: Colors.colSecondaryContainer
+            colBackgroundToggledHover: Colors.colSecondaryContainerHover
+            colRippleToggled: Colors.colSecondaryContainerActive
+            // toggled: GlobalStates.sidebarRightOpen
+            property color colText: Colors.colOnLayer0//toggled ? Colors.m3colors.m3onSecondaryContainer : Colors.colOnLayer0
+
+            Behavior on colText {
+                animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
+            }
+
+            RowLayout {
+                id: indicatorsRowLayout
+                anchors.centerIn: parent
+                property real realSpacing: 15
+                spacing: 0
+                MaterialIcon {
+                    id: volumeIcon
+
+                    text: Icons.getVolumeIcon(AudioService.volume, AudioService.muted)
+                    iconSize: Appearance.font.pixelSize.larger
+                    color: Colors.colOnLayer0
+                    Layout.rightMargin: indicatorsRowLayout.realSpacing
+
+                    WheelHandler {
+                        target: volumeIcon
+                        onWheel: event => {
+                            const current = AudioService.sink.audio.volume;
+                            const step = current < 0.1 ? 0.01 : 0.02;
+                            if (event.angleDelta.y < 0)
+                                AudioService.sink.audio.volume = Math.max(0, current - step);
+                            else if (event.angleDelta.y > 0)
+                                AudioService.sink.audio.volume = Math.min(1, current + step);
+                        }
+                        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+                    }
+                }
+
+                MaterialIcon {
+                    //Layout.rightMargin: indicatorsRowLayout.realSpacing
+                    text: NetworkService.active ? Icons.getNetworkIcon(NetworkService.active.strength ?? 0) : "signal_wifi_off"
+                    iconSize: Appearance.font.pixelSize.larger
+                    color: Colors.colOnLayer0 // toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
+                }
+            }
         }
 
         ClockWidget {

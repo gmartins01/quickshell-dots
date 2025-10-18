@@ -17,7 +17,6 @@ Singleton {
 
   // Register this panel
   function registerPanel(panel) {
-    console.log("Registr panel")
     registeredPanels[panel.objectName] = panel
     console.log("PanelService ", "Registered:", panel.objectName)
   }

@@ -7,7 +7,6 @@ import "./modules/background/"
 import "./modules/calendar/"
 import "./modules/notificationPopup/"
 import "./modules/notificationCenter/"
-import "./modules/common/"
 import "./services/"
 
 import Quickshell
