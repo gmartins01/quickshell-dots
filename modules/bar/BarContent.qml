@@ -31,7 +31,7 @@ Item {
             fill: parent
             margins: 0//Config.options.bar.cornerStyle === 1 ? (Appearance.sizes.hyprlandGapsOut) : 0 // idk why but +1 is needed
         }
-        color: Colors.m3colors.m3background//Config.options.bar.showBackground ? Appearance.colors.colLayer0 : "transparent"
+        color: Colors.colLayer0 //Config.options.bar.showBackground ? Appearance.colors.colLayer0 : "transparent"
         radius: 0//Config.options.bar.cornerStyle === 1 ? Appearance.rounding.windowRounding : 0
         border.width: 0//Config.options.bar.cornerStyle === 1 ? 1 : 0
         border.color: Colors.m3colors.m3background//Appearance.colors.colLayer0Border

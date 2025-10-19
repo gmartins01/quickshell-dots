@@ -7,6 +7,7 @@ import qs.modules.background
 import qs.modules.calendar
 import qs.modules.notificationPopup
 import qs.modules.notificationCenter
+import qs.modules.OSD
 
 import Quickshell
 import QtQuick
@@ -39,6 +40,14 @@ ShellRoot {
     CalendarWidget {
         id: calendarPanel
         objectName: "calendarPanel"
+    }
+
+    Variants {
+        model: Quickshell.screens
+
+        delegate: VolumeOSD {
+            modelData: item
+        }
     }
 
     LazyLoader {
