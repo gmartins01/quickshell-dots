@@ -8,9 +8,9 @@ import QtQuick
 RippleButton {
     id: root
 
-    property real buttonPadding: 7
-    implicitWidth: icon.width + buttonPadding * 2
-    implicitHeight: icon.height + buttonPadding * 2
+    implicitWidth: icon.implicitWidth + 10 * 2
+    implicitHeight: icon.implicitHeight + 5 * 2
+
     buttonRadius: Appearance.rounding.full
     colBackgroundHover: Colors.colLayer1Hover
     colRipple: Colors.colLayer1Active
@@ -18,8 +18,10 @@ RippleButton {
     colBackgroundToggledHover: Colors.colSecondaryContainerHover
     colRippleToggled: Colors.colSecondaryContainerActive
 
+    toggled: PanelService.isPanelOpen("notificationCenter")
+
     onClicked: {
-        const panel = PanelService.getPanel("notificationHistoryPanel");
+        const panel = PanelService.getPanel("notificationCenter");
         NotificationService.timeoutAll();
         NotificationService.markAllRead();
         panel?.toggle(this);

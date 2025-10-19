@@ -31,7 +31,6 @@ MouseArea {
     implicitWidth: 20
     implicitHeight: 20
     onPressed: event => {
-        console.log("WINDOW, ", root.activeMenu);
         switch (event.button) {
         case Qt.LeftButton:
             item.activate();

@@ -1,20 +1,16 @@
 //@ pragma Env QS_NO_RELOAD_POPUP=1
 //@ pragma UseQApplication
 
-// import qs.modules//"./modules/"
-import "./modules/bar/"
-import "./modules/background/"
-import "./modules/calendar/"
-import "./modules/notificationPopup/"
-import "./modules/notificationCenter/"
-import "./services/"
+import qs.services
+import qs.modules.bar
+import qs.modules.background
+import qs.modules.calendar
+import qs.modules.notificationPopup
+import qs.modules.notificationCenter
 
 import Quickshell
 import QtQuick
-import Quickshell.Io
-import Quickshell.Services.Notifications
 import QtQuick
-import QtCore
 
 ShellRoot {
     property bool enableBar: true
@@ -36,8 +32,8 @@ ShellRoot {
     }
 
     NotificationCenter {
-        id: notificationHistoryPanel
-        objectName: "notificationHistoryPanel"
+        id: notificationCenter
+        objectName: "notificationCenter"
     }
 
     CalendarWidget {

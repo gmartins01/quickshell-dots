@@ -2,7 +2,7 @@ import qs.utils
 import qs.services
 import qs.config
 import qs.modules.widgets
-import "./systray/"
+import qs.modules.bar.systray
 
 import QtQuick
 import QtQuick.Layouts
@@ -66,7 +66,7 @@ Item {
         spacing: 4
 
         Workspaces {
-            screenName: root.screen.name
+            screenName: root.screen?.name
             widgetHeight: 45//barWindow.widgetThickness
         }
     }
@@ -85,12 +85,12 @@ Item {
             Layout.fillWidth: false
             Layout.fillHeight: true
             invertSide: Settings?.options.bar.position === "bottom"
-
         }
 
         NotificationIcon {
-            Layout.alignment: Qt.AlignVCenter
-            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.rightMargin: 5//Appearance.rounding.screenRounding
+            Layout.fillWidth: false
         }
 
         StyledText {
@@ -158,8 +158,9 @@ Item {
 
         ClockWidget {
             showDate: false
-            Layout.alignment: Qt.AlignVCenter
-            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.rightMargin: 5//Appearance.rounding.screenRounding
+            Layout.fillWidth: false
         }
     }
 }
