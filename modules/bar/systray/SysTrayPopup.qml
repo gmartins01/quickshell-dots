@@ -176,8 +176,8 @@ Loader {
                             Layout.fillWidth: false//root.vertical
                             popupX: popupBackground.calculatedX
                             popupY: popupBackground.calculatedY
-                            // onMenuClosed: root.releaseFocus()
-                            onMenuOpened: qsWindow => root.setExtraWindowAndGrabFocus(qsWindow)
+                            onMenuClosed: root.close()
+                            // onMenuOpened: qsWindow => root.setExtraWindowAndGrabFocus(qsWindow)
                         }
                     }
                 }

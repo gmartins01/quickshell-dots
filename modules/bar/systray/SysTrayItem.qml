@@ -16,20 +16,31 @@ MouseArea {
     property int popupX: 0
     property int popupY: 0
 
+    property var activeMenu: null
+
     signal menuOpened(qsWindow: var)
     signal menuClosed
+
+    function windowOpen(qsWindow: var) {
+        root.activeMenu = qsWindow.Window;
+        console.log("aa ", root.activeMenu);
+    }
 
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     implicitWidth: 20
     implicitHeight: 20
     onPressed: event => {
+        console.log("WINDOW, ", root.activeMenu);
         switch (event.button) {
         case Qt.LeftButton:
             item.activate();
             break;
         case Qt.RightButton:
-            if (item.hasMenu)
+            if (menu.active)
+                // root.openedWindow.closed();
+                menu.close();
+            else if (item.hasMenu)
                 menu.open();
             break;
         }
@@ -48,23 +59,27 @@ MouseArea {
         function open() {
             menu.active = true;
         }
+        function close() {
+            menu.active = false;
+        }
         active: false
         sourceComponent: SysTrayMenu {
             Component.onCompleted: this.open()
             trayItemMenuHandle: root.item.menu
             anchor {
                 window: root.QsWindow.window
-                rect.x: root.popupX + root.x + (root.width/2) - (this.width / 2) 
+                rect.x: root.popupX + root.x + (root.width / 2) - (this.width / 2)
                 // rect.y: root.y + (Settings.options.bar.vertical ? QsWindow.window?.height : 0)
-                rect.y: root.popupY + root.y - (root.height / 2)
+                rect.y: root.popupY + root.y - (root.height / 2) + 25
                 rect.height: root.height
                 rect.width: root.width
                 edges: Settings.options.bar.bottom ? (Edges.Top | Edges.Left) : (Edges.Bottom | Edges.Right) //TODO: VER ISTO
                 gravity: Settings.options.bar.bottom ? (Edges.Top | Edges.Left) : (Edges.Bottom | Edges.Right)
             }
-            onMenuOpened: window => root.menuOpened(window)
+            // onMenuOpened: window => root.windowOpen(window) //{ window => root.menuOpened(window);
+            // window => root.openedWindow = window;
+            // }
             onMenuClosed: {
-                console.log("FECHADO");
                 root.menuClosed();
                 menu.active = false;
             }

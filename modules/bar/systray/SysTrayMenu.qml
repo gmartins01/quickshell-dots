@@ -17,7 +17,7 @@ PopupWindow {
     signal menuOpened(qsWindow: var) // Correct type is QsWindow, but QML does not like that
 
     color: "transparent"
-    property real padding: 25
+    property real padding: 0
 
     implicitHeight: {
         let result = 0;
