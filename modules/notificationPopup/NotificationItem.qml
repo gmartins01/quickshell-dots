@@ -26,7 +26,7 @@ Item { // Notification item area
     property var parentDragIndex: qmlParent?.dragIndex ?? -1
     property var parentDragDistance: qmlParent?.dragDistance ?? 0
     property var dragIndexDiff: Math.abs(parentDragIndex - index)
-    property real xOffset: dragIndexDiff == 0 ? Math.max(0, parentDragDistance) : parentDragDistance > dragConfirmThreshold ? 0 : dragIndexDiff == 1 ? Math.max(0, parentDragDistance * 0.3) : dragIndexDiff == 2 ? Math.max(0, parentDragDistance * 0.1) : 0
+    property real xOffset: dragIndexDiff == 0 ? parentDragDistance : Math.abs(parentDragDistance) > dragConfirmThreshold ? 0 : dragIndexDiff == 1 ? (parentDragDistance * 0.3) : dragIndexDiff == 2 ? (parentDragDistance * 0.1) : 0
 
     implicitHeight: background.implicitHeight
 
@@ -50,9 +50,10 @@ Item { // Notification item area
         return processedBody;
     }
 
-    function destroyWithAnimation() {
+    function destroyWithAnimation(left = false) {
         root.qmlParent.resetDrag();
         background.anchors.leftMargin = background.anchors.leftMargin; // Break binding
+        destroyAnimation.left = left;
         destroyAnimation.running = true;
     }
 
@@ -64,12 +65,13 @@ Item { // Notification item area
 
     SequentialAnimation { // Drag finish animation
         id: destroyAnimation
+        property bool left: true
         running: false
 
         NumberAnimation {
             target: background.anchors
             property: "leftMargin"
-            to: root.width + root.dismissOvershoot
+            to: (root.width + root.dismissOvershoot) * (destroyAnimation.left ? -1 : 1)
             duration: Appearance.animation.elementMove.duration
             easing.type: Appearance.animation.elementMove.type
             easing.bezierCurve: Appearance.animation.elementMove.bezierCurve
@@ -104,8 +106,8 @@ Item { // Notification item area
         }
 
         onDragReleased: (diffX, diffY) => {
-            if (diffX > root.dragConfirmThreshold)
-                root.destroyWithAnimation();
+            if (Math.abs(diffX) > root.dragConfirmThreshold)
+                root.destroyWithAnimation(diffX < 0);
             else
                 dragManager.resetDrag();
         }
