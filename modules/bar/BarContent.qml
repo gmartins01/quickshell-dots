@@ -66,7 +66,7 @@ Item {
         spacing: 4
 
         Workspaces {
-            screenName: root.screen?.name
+            screenName: root?.screen?.name
             widgetHeight: 45//barWindow.widgetThickness
         }
     }

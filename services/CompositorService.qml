@@ -144,7 +144,7 @@ Singleton {
     }
 
     function detectCompositor() {
-        console.log("A Detetar compositor")
+        console.log("A Detetar compositor");
         if (hyprlandSignature && hyprlandSignature.length > 0) {
             isHyprland = true;
             isNiri = false;
@@ -178,7 +178,8 @@ Singleton {
             return NiriService.powerOnMonitors();
         }
         if (isHyprland) {
-            return Hyprland.dispatch("dpms on");
+            Hyprland.dispatch("dpms on");
+            return Hyprland.dispatch("qs ipc call lock lock");
         }
         console.warn("CompositorService: Cannot power on monitors, unknown compositor");
     }
