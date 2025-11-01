@@ -29,6 +29,11 @@
             "useNerdFont": false
         }
     },
+    "time": {
+        "dateFormat": "dddd, dd/MM",
+        "format": "hh:mm",
+        "shortDateFormat": "dd/MM"
+    },
     "wallpaper": {
         "directory": "/home/gmartins/Pictures/",
         "enableMultiMonitorDirectories": false,

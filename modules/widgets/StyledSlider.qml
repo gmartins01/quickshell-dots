@@ -42,13 +42,13 @@ Item {
         width: parent.width
         spacing: 10//Theme.spacingM
 
-        // MaterialIcon {
-        //     text: ""
-        //     iconSize: 24//Theme.iconSize
-        //     color: "#FFF"//slider.enabled ? Theme.surfaceText : Theme.onSurface_38
-        //     anchors.verticalCenter: parent.verticalCenter
-        //     visible: slider.leftIcon.length > 0
-        // }
+        MaterialIcon {
+            text: ""
+            iconSize: 24//Theme.iconSize
+            color: "#FFF"//slider.enabled ? Theme.surfaceText : Theme.onSurface_38
+            anchors.verticalCenter: parent.verticalCenter
+            visible: slider.leftIcon.length > 0
+        }
 
         StyledRect {
             id: sliderTrack
@@ -260,12 +260,12 @@ Item {
             }
         }
 
-        // MaterialIcon {
-        //     text: ""
-        //     iconSize: 24//Theme.iconSize
-        //     color: "red"//slider.enabled ? Theme.surfaceText : Theme.onSurface_38
-        //     anchors.verticalCenter: parent.verticalCenter
-        //     visible: slider.rightIcon.length > 0
-        // }
+        MaterialIcon {
+            text: ""
+            iconSize: 24//Theme.iconSize
+            color: "red"//slider.enabled ? Theme.surfaceText : Theme.onSurface_38
+            anchors.verticalCenter: parent.verticalCenter
+            visible: slider.rightIcon.length > 0
+        }
     }
 }

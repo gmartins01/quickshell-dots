@@ -68,7 +68,7 @@ LazyLoader {
             implicitWidth: root.contentItem.implicitWidth + margin * 2
             implicitHeight: root.contentItem.implicitHeight + margin * 2
             color: ColorUtils.applyAlpha(Colors.colors.colSurfaceContainer, 1 - Appearance.backgroundTransparency)
-            radius: Appearance.rounding.small
+            radius: Appearance.rounding.XXS
             children: [root.contentItem]
 
             border.width: 1

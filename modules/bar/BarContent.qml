@@ -15,14 +15,14 @@ Item {
     property var brightnessMonitor: BrightnessService.getMonitorForScreen(screen)
 
     // Background shadow
-    // Loader {
-    //     active: true//Config.options.bar.showBackground && Config.options.bar.cornerStyle === 1
-    //     anchors.fill: barBackground
-    //     sourceComponent: StyledRectangularShadow {
-    //         anchors.fill: undefined // The loader's anchors act on this, and this should not have any anchor
-    //         target: barBackground
-    //     }
-    // }
+    Loader {
+        active: true//Config.options.bar.showBackground && Config.options.bar.cornerStyle === 1
+        anchors.fill: barBackground
+        sourceComponent: StyledRectangularShadow {
+            anchors.fill: undefined // The loader's anchors act on this, and this should not have any anchor
+            target: barBackground
+        }
+    }
 
     // Background
     Rectangle {
@@ -47,7 +47,7 @@ Item {
 
         DistroIcon {
             Layout.alignment: Qt.AlignVCenter
-            // Layout.leftMargin: Appearance.rounding.screenRounding
+             Layout.leftMargin: Appearance.rounding.screenRounding
         }
 
         ActiveWindow {
@@ -89,7 +89,7 @@ Item {
 
         NotificationIcon {
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            Layout.rightMargin: 5//Appearance.rounding.screenRounding
+            Layout.rightMargin: Appearance.rounding.screenRounding
             Layout.fillWidth: false
         }
 
@@ -100,7 +100,7 @@ Item {
         RippleButton {
 
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            Layout.rightMargin: 5//Appearance.rounding.screenRounding
+            Layout.rightMargin: Appearance.rounding.screenRounding
             Layout.fillWidth: false
 
             implicitWidth: indicatorsRowLayout.implicitWidth + 10 * 2
@@ -118,6 +118,15 @@ Item {
 
             Behavior on colText {
                 animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
+            }
+
+            toggled: PanelService.isPanelOpen("controlCenter")
+
+            onClicked: {
+                const panel = PanelService.getPanel("controlCenter");
+                panel.screen = root.screen;
+                console.log("screen ", panel.screen, "brightnessMonitor ", brightnessMonitor);
+                panel?.toggle(this);
             }
 
             RowLayout {
@@ -159,7 +168,7 @@ Item {
         ClockWidget {
             showDate: false
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            Layout.rightMargin: 5//Appearance.rounding.screenRounding
+            Layout.rightMargin: Appearance.rounding.screenRounding
             Layout.fillWidth: false
         }
     }

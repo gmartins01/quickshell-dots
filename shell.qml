@@ -2,12 +2,15 @@
 //@ pragma UseQApplication
 
 import qs.services
+import qs.modules
 import qs.modules.bar
 import qs.modules.background
 import qs.modules.calendar
 import qs.modules.notificationPopup
 import qs.modules.notificationCenter
+import qs.modules.controlCenter
 import qs.modules.OSD
+import qs.modules.lock
 
 import Quickshell
 import QtQuick
@@ -56,4 +59,17 @@ ShellRoot {
     }
 
     Background {}
+
+    Lock {
+        id: lock
+    }
+
+    ControlCenter {
+        id: controlCenter
+        objectName: "controlCenter"
+    }
+
+    // IdleMonitors {
+    //     lock: lock
+    // }
 }
