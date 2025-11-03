@@ -21,7 +21,7 @@ Row {
         height: 24 + 7 * 2
         anchors.verticalCenter: parent.verticalCenter
         radius: (24 + 7 * 2) / 2
-        color: Colors.colPrimary//iconArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.withAlpha(Theme.primary, 0)
+        color: iconArea.containsMouse ? Colors.colOnPrimary : "transparent"
 
         MouseArea {
             id: iconArea
@@ -40,7 +40,7 @@ Row {
 
         MaterialIcon {
             anchors.centerIn: parent
-            text: Icons.getVolumeIcon(AudioService.volume, AudioService.muted)
+            text: Icons.getBrightnessIcon(brightnessMonitor.brightness)
             iconSize: 24//Theme.iconSize
             color: Colors.colPrimary
         }
@@ -71,7 +71,7 @@ Row {
 
         readonly property real actualBrightnessPercent: brightnessMonitor ? brightnessMonitor.brightness * 100 : 0
 
-        value: actualBrightnessPercent   // 👈 em vez de setar no onCompleted
+        value: actualBrightnessPercent
 
         onSliderValueChanged: newValue => {
             if (brightnessMonitor)
@@ -80,7 +80,7 @@ Row {
 
         anchors.verticalCenter: parent.verticalCenter
         // Layout.fillWidth: true
-        width: parent.width - 24
+        width: parent.width - (24 + 7 * 2)
         height: 40
         minimum: 0
         maximum: 100

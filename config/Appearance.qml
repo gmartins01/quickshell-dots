@@ -55,6 +55,15 @@ Singleton {
         property int windowRounding: 18
     }
 
+    margins: QtObject {
+        property int smallest: 2
+        property int smaller: 4
+        property int small: 8
+        property int normal: 12
+        property int large: 16
+        property int larger: 24
+    }
+
     font: QtObject {
         property QtObject family: QtObject {
             property string main: "Rubik"
@@ -75,6 +84,7 @@ Singleton {
             property int huge: 22
             property int hugeass: 23
             property int title: huge
+            property int iconSize: 24
         }
     }
 
@@ -227,14 +237,5 @@ Singleton {
         property real sidebarWidthExtended: 750
         property real baseVerticalBarWidth: 46
         property real verticalBarWidth: 46//Settings.options.bar.cornerStyle === 1 ? (baseVerticalBarWidth + root.sizes.hyprlandGapsOut * 2) : baseVerticalBarWidth
-    }
-
-    margins: QtObject {
-        property int smallest: 2
-        property int smaller: 4
-        property int small: 8
-        property int normal: 12
-        property int large: 16
-        property int larger: 24
     }
 }

@@ -36,10 +36,10 @@ Scope {
                 color: "transparent"
 
                 anchors {
-                    top: !Settings.options.bar.bottom
+                    top: Settings.options.bar.position === "top"//!Settings.options.bar.bottom
                     left: true
                     right: true
-                    bottom: Settings.options.bar.bottom
+                    bottom: Settings.options.bar.position === "bottom"//Settings.options.bar.bottom
                 }
 
                 BarContent {
@@ -56,6 +56,25 @@ Scope {
                         topMargin: 0
                         bottomMargin: 0
                         rightMargin: 0
+                    }
+
+                    states: State {
+                        name: "bottom"
+                        when: Settings.options.bar.position === "bottom"//Settings.options.bar.bottom
+                        AnchorChanges {
+                            target: barContent
+                            anchors {
+                                right: parent.right
+                                left: parent.left
+                                top: undefined
+                                bottom: parent.bottom
+                            }
+                        }
+                        PropertyChanges {
+                            target: barContent
+                            anchors.topMargin: 0
+                            anchors.bottomMargin: 0
+                        }
                     }
                 }
 
@@ -74,14 +93,14 @@ Scope {
 
                     states: State {
                         name: "bottom"
-                        when: Settings.options.bar.bottom
+                        when: Settings.options.bar.position === "bottom"//Settings.options.bar.bottom
                         AnchorChanges {
                             target: roundDecorators
                             anchors {
                                 right: parent.right
                                 left: parent.left
                                 top: undefined
-                                bottom: barContent.bottom
+                                bottom: barContent.top
                             }
                         }
                     }
@@ -102,7 +121,7 @@ Scope {
                             corner: RoundCorner.CornerEnum.TopLeft
                             states: State {
                                 name: "bottom"
-                                when: Settings.options.bar.bottom
+                                when: Settings.options.bar.position === "bottom"
                                 PropertyChanges {
                                     leftCorner.corner: RoundCorner.CornerEnum.BottomLeft
                                 }
@@ -112,8 +131,8 @@ Scope {
                             id: rightCorner
                             anchors {
                                 right: parent.right
-                                top: !Settings.options.bar.bottom ? parent.top : undefined
-                                bottom: Settings.options.bar.bottom ? parent.bottom : undefined
+                                top: Settings.options.bar.position === "top" ? parent.top : undefined
+                                bottom: Settings.options.bar.position === "bottom" ? parent.bottom : undefined
                             }
                             implicitSize: Appearance.rounding.screenRounding
                             color: bar.showBarBackground ? Colors.colLayer0 : "transparent"
@@ -121,7 +140,7 @@ Scope {
                             corner: RoundCorner.CornerEnum.TopRight
                             states: State {
                                 name: "bottom"
-                                when: Settings.options.bar.bottom
+                                when: Settings.options.bar.position === "bottom" //Settings.options.bar.bottom
                                 PropertyChanges {
                                     rightCorner.corner: RoundCorner.CornerEnum.BottomRight
                                 }

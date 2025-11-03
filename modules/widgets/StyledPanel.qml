@@ -11,6 +11,8 @@ Loader {
 
     property ShellScreen screen
     property real scaling: 1.0
+    property alias content: root.sourceComponent
+    property alias contentLoader: root
 
     property Component panelContent: null
     property real preferredWidth: 700

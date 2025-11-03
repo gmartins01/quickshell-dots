@@ -14,7 +14,7 @@ Row {
     property var defaultSink: AudioService.sink
     property color sliderTrackColor: "transparent"
 
-    height: 40
+    height: 20
     spacing: 0
 
     Rectangle {
@@ -22,7 +22,7 @@ Row {
         height: 24 + 7 * 2
         anchors.verticalCenter: parent.verticalCenter
         radius: (24 + 7 * 2) / 2
-        color: Colors.colPrimary//iconArea.containsMouse ? Qt.rgba(Theme.primary.r, Theme.primary.g, Theme.primary.b, 0.12) : Theme.withAlpha(Theme.primary, 0)
+        color: iconArea.containsMouse ? Colors.colOnPrimary : "transparent"
 
         MouseArea {
             id: iconArea
@@ -74,7 +74,7 @@ Row {
         readonly property real displayPercent: actualVolumePercent
 
         anchors.verticalCenter: parent.verticalCenter
-        width: parent.width - 24 //- parent.gap * 2
+        width: parent.width -(24 + 7 * 2)
         height: 40
         minimum: 0
         maximum: 100

@@ -20,8 +20,8 @@ import Quickshell.Wayland
 StyledPanel {
     id: root
 
-    preferredWidth: 780 // TODO: meter na Appearance
-    preferredHeight: 580
+    preferredWidth: 560 // TODO: meter na Appearance
+    preferredHeight: 480
     panelBackgroundColor: Colors.colLayer1
     panelKeyboardFocus: true
 
@@ -33,16 +33,15 @@ StyledPanel {
         //     width: 100//parent.width
         //     height: 14
         // }
-
-        BrightnessSlider {
-            anchors.centerIn: parent
-            width: 100//parent.width
-
-            height: 14
+        Binding {
+            target: root
+            property: "preferredHeight"
+            value: column.implicitHeight + 15
         }
         ColumnLayout {
+            id:column
             anchors.fill: parent
-            anchors.margins: 12
+            anchors.margins: 10
             spacing: 12
 
             RowLayout {
@@ -108,18 +107,141 @@ StyledPanel {
             }
 
             RowLayout {
+                id: slidersRow
+
                 Layout.fillHeight: false
                 Layout.fillWidth: true
-                spacing: 12
-                Layout.margins: 20
+                spacing: 15
+                Layout.margins: 10
                 Layout.topMargin: 5
                 Layout.bottomMargin: 0
 
+                // Rectangle {
+                //     color: "#FFF"
+                //     Layout.fillWidth: true
+                //     height: 50
+                // }
+                // Rectangle {
+                //     color: "red"
+                //     Layout.fillWidth: true
+                //
+                //     height: 50
+                // }
+
                 AudioSlider {
                     Layout.fillWidth: true
+                    // width: 150//parent.width
+                    Layout.preferredWidth: parent.width / 2
+                }
+
+                BrightnessSlider {
+                    // width: 150//parent.width
+                    Layout.fillWidth: true
+
                     Layout.preferredWidth: parent.width / 2
                 }
             }
+
+            VolumeWidget {
+                Layout.fillWidth: true
+
+                // Layout.fillHeight: true
+
+                Layout.preferredHeight: 180//parent.width / 2
+            }
+            RowLayout {
+                id: slidersRowTest
+
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                spacing: 15
+                Layout.margins: 10
+                Layout.topMargin: 5
+                Layout.bottomMargin: 0
+
+                Rectangle {
+                    color: "#FFF"
+                    Layout.fillWidth: true
+                    height: 50
+                }
+
+                Rectangle {
+                    color: "red"
+                    Layout.fillWidth: true
+
+                    height: 50
+                }
+            }
+            RowLayout {
+                id: sli3dersRowTest
+
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                spacing: 15
+                Layout.margins: 10
+                Layout.topMargin: 5
+                Layout.bottomMargin: 0
+
+                Rectangle {
+                    color: "#FFF"
+                    Layout.fillWidth: true
+                    height: 50
+                }
+
+                Rectangle {
+                    color: "red"
+                    Layout.fillWidth: true
+
+                    height: 50
+                }
+            }
+            RowLayout {
+                id: slidersRowTes3t
+
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                spacing: 15
+                Layout.margins: 10
+                Layout.topMargin: 5
+                Layout.bottomMargin: 0
+
+                Rectangle {
+                    color: "#FFF"
+                    Layout.fillWidth: true
+                    height: 50
+                }
+
+                Rectangle {
+                    color: "red"
+                    Layout.fillWidth: true
+
+                    height: 50
+                }
+            }
+            RowLayout {
+                id: slidersRowTes2t
+
+                Layout.fillHeight: false
+                Layout.fillWidth: true
+                spacing: 15
+                Layout.margins: 10
+                Layout.topMargin: 5
+                Layout.bottomMargin: 0
+
+                Rectangle {
+                    color: "#FFF"
+                    Layout.fillWidth: true
+                    height: 50
+                }
+
+                Rectangle {
+                    color: "red"
+                    Layout.fillWidth: true
+
+                    height: 50
+                }
+            }
+
             Item {
                 Layout.fillHeight: true
             }

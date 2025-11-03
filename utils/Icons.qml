@@ -33,4 +33,14 @@ Singleton {
 
         return "Notifications";
     }
+
+    function getBrightnessIcon(value: real): string {
+        if (value >= 0.65)
+            return "brightness_high";
+        if (value >= 0.35)
+            return "brightness_medium";
+        if (value > 0)
+            return "brightness_low";
+        return "brightness_empty";
+    }
 }

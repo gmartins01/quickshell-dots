@@ -43,4 +43,37 @@ Singleton {
         //     console.log("Volume changed to: ", volume);
         // }
     }
+
+    function displayName(node) {
+        if (!node) {
+            return "";
+        }
+
+        if (node.properties && node.properties["device.description"]) {
+            return node.properties["device.description"];
+        }
+
+        if (node.description && node.description !== node.name) {
+            return node.description;
+        }
+
+        if (node.nickname && node.nickname !== node.name) {
+            return node.nickname;
+        }
+
+        if (node.name.includes("analog-stereo")) {
+            return "Built-in Speakers";
+        }
+        if (node.name.includes("bluez")) {
+            return "Bluetooth Audio";
+        }
+        if (node.name.includes("usb")) {
+            return "USB Audio";
+        }
+        if (node.name.includes("hdmi")) {
+            return "HDMI Audio";
+        }
+
+        return node.name;
+    }
 }
